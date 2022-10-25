@@ -19,6 +19,7 @@ import java.util.Map;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class Album implements Serializable {
+    private Long id;
     private String name;
     private String artist;
     private String[] genres;

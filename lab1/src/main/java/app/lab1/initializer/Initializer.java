@@ -56,37 +56,37 @@ public class Initializer {
 
         Song theGoodLife = Song.builder()
                 .name("The Good Life")
-                .length(LocalTime.parse("4:19"))
+                .length("4:19")
                 .streams(382910)
                 .album(pinkerton)
                 .build();
         Song butterfly = Song.builder()
                 .name("Butterfly")
-                .length(LocalTime.parse("2:53"))
+                .length("2:53")
                 .streams(213221)
                 .album(pinkerton)
                 .build();
         Song beware = Song.builder()
                 .name("Beware")
-                .length(LocalTime.parse("5:53"))
+                .length("5:53")
                 .streams(932110)
                 .album(exmilitary)
                 .build();
         Song cultureShock = Song.builder()
                 .name("Culture Shock")
-                .length(LocalTime.parse("4:21"))
+                .length("4:21")
                 .streams(516591)
                 .album(exmilitary)
                 .build();
         Song telefony = Song.builder()
                 .name("Telefony")
-                .length(LocalTime.parse("4:38"))
+                .length("4:38")
                 .streams(98760)
                 .album(deathconsciousness)
                 .build();
         Song earthmover = Song.builder()
                 .name("Earthmover")
-                .length(LocalTime.parse("11:28"))
+                .length("11:28")
                 .streams(46787)
                 .album(deathconsciousness)
                 .build();

@@ -31,12 +31,8 @@ public class DataStorage {
     }
 
     public synchronized void saveNewAlbum(Album album) throws IllegalArgumentException {
-        findByIDAlbum(album.getId()).ifPresentOrElse(
-                original -> {
-                    throw new IllegalArgumentException(
-                            String.format("The album name \"%s\" is not unique", album.getName()));
-                },
-                () -> albums.add(album));
+        album.setId(findAllAlbums().stream().mapToLong(Album::getId).max().orElse(0) + 1);
+        albums.add(album);
     }
 
     public synchronized void deleteExistingAlbum(Long id) throws IllegalArgumentException {

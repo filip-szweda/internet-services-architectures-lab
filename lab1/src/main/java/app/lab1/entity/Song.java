@@ -9,7 +9,6 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -18,8 +17,9 @@ import java.time.LocalTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class Song implements Serializable {
+    private Long id;
     private String name;
-    private LocalTime length;
+    private String length;
     private int streams;
     private Album album;
 }
