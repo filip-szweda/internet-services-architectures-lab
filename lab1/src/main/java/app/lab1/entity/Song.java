@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -16,7 +17,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public class Song {
+public class Song implements Serializable {
+    private Long id;
     private String name;
     private float score;
     private int streams;

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public class Album {
+public class Album implements Serializable {
+    private Long id;
     private String name;
     private String[] genres;
     private Date releaseDate;
