@@ -9,7 +9,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Getter
@@ -19,9 +19,9 @@ import java.util.Map;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class Album implements Serializable {
-    private Long id;
     private String name;
+    private String artist;
     private String[] genres;
-    private Date releaseDate;
-    private Map<Integer, Song> songs;
+    private LocalDate releaseDate;
+    private double score;
 }
