@@ -1,19 +1,14 @@
 package app.lab1.initializer;
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import app.lab1.entity.Album;
 import app.lab1.entity.Song;
-import app.lab1.repository.AlbumRepository;
-import app.lab1.repository.SongRepository;
 import app.lab1.service.AlbumService;
 import app.lab1.service.SongService;
 
 import javax.annotation.PostConstruct;
-import java.io.InputStream;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Component
 public class Initializer {

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Log
 @Component
@@ -26,8 +25,7 @@ public class DataStorage {
     public Optional<Album> findByIDAlbum(Long id) {
         return albums.stream()
                 .filter(song -> song.getId().equals(id))
-                .findFirst()
-                .map(Cloning::clone);
+                .findFirst();
     }
 
     public synchronized void saveNewAlbum(Album album) throws IllegalArgumentException {
@@ -51,8 +49,7 @@ public class DataStorage {
     public synchronized Optional<Song> findByIDSong(Long id) {
         return songs.stream()
                 .filter(song -> song.getId().equals(id))
-                .findFirst()
-                .map(Cloning::clone);
+                .findFirst();
     }
 
     public synchronized void saveNewSong(Song song) throws IllegalArgumentException {
@@ -62,7 +59,9 @@ public class DataStorage {
 
     public synchronized void deleteExistingSong(Long id) throws IllegalArgumentException {
         findByIDSong(id).ifPresentOrElse(
-                original -> songs.remove(original),
+                original -> {
+                    songs.remove(original);
+                },
                 () -> {
                     throw new IllegalArgumentException(
                             String.format("The song with id \"%d\" does not exist", id));

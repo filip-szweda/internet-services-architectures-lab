@@ -53,7 +53,7 @@ public class CommandLine implements CommandLineRunner {
                     System.out.print("Streams: ");
                     int streams = songInput.nextInt();
                     System.out.print("Album id: ");
-                    long albumId = songInput.nextInt();
+                    long albumId = songInput.nextLong();
                     albumService.findByID(albumId).ifPresentOrElse(
                         (album) -> {
                             Song song = Song.builder()
@@ -70,7 +70,7 @@ public class CommandLine implements CommandLineRunner {
                 case 4 -> {
                     Scanner songInput = new Scanner(System.in);
                     System.out.print("Song id: ");
-                    long songId = songInput.nextInt();
+                    long songId = songInput.nextLong();
                     try {
                         songService.deleteExisting(songId);
                     }
