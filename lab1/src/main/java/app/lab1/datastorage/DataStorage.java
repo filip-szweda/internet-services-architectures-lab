@@ -25,7 +25,8 @@ public class DataStorage {
     public Optional<Album> findByIDAlbum(Long id) {
         return albums.stream()
                 .filter(song -> song.getId().equals(id))
-                .findFirst();
+                .findFirst()
+                .map(Cloning::clone);
     }
 
     public synchronized void saveNewAlbum(Album album) throws IllegalArgumentException {
@@ -49,7 +50,8 @@ public class DataStorage {
     public synchronized Optional<Song> findByIDSong(Long id) {
         return songs.stream()
                 .filter(song -> song.getId().equals(id))
-                .findFirst();
+                .findFirst()
+                .map(Cloning::clone);
     }
 
     public synchronized void saveNewSong(Song song) throws IllegalArgumentException {
