@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @org.springframework.stereotype.Repository
-public class AlbumRepository implements Repository<Album, Long>{
+public class AlbumRepository implements Repository<Album, Long> {
     private DataStorage storage;
 
     @Autowired
