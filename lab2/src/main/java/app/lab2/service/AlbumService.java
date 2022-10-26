@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import app.lab2.entity.Album;
 import app.lab2.repository.AlbumRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,18 +18,22 @@ public class AlbumService {
         this.repository = repository;
     }
 
+    @Transactional
     public Optional<Album> findByID(Long id) {
         return repository.findByID(id);
     }
 
+    @Transactional
     public List<Album> findAll() {
         return repository.findAll();
     }
 
+    @Transactional
     public void saveNew(Album album) {
         repository.saveNew(album);
     }
 
+    @Transactional
     public void deleteExisting(Long song) {
         repository.deleteExisting(repository.findByID(song).orElseThrow());
     }
