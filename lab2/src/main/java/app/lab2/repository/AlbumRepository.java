@@ -8,12 +8,4 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AlbumRepository extends JpaRepository<Album, Long> {
-    Optional<Album> findByID(Long id);
-
-    List<Album> findAll();
-
-    void saveNew(Album entity);
-
-    void deleteExisting(Album entity);
-}
+public interface AlbumRepository extends JpaRepository<Album, Long> {}

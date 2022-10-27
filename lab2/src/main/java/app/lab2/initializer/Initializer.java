@@ -6,6 +6,7 @@ import app.lab2.entity.Album;
 import app.lab2.entity.Song;
 import app.lab2.service.AlbumService;
 import app.lab2.service.SongService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class Initializer {
     }
 
     @PostConstruct
+    @Transactional
     private synchronized void init() {
         Album pinkerton = Album.builder()
                 .name("Pinkerton")

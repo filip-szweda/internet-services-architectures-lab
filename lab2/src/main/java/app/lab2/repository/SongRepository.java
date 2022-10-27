@@ -8,12 +8,4 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SongRepository extends JpaRepository<Song, Long> {
-    Optional<Song> findByID(Long id);
-
-    List<Song> findAll();
-
-    Song saveNew(Song entity);
-
-    void deleteExisting(Song entity);
-}
+public interface SongRepository extends JpaRepository<Song, Long> {}

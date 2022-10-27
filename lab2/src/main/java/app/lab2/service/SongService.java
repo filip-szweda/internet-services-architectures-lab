@@ -18,7 +18,7 @@ public class SongService {
 
     @Transactional
     public Optional<Song> findByID(Long id) {
-        return repository.findByID(id);
+        return repository.findById(id);
     }
 
     @Transactional
@@ -28,11 +28,11 @@ public class SongService {
 
     @Transactional
     public Song saveNew(Song song) {
-        return repository.saveNew(song);
+        return repository.save(song);
     }
 
     @Transactional
     public void deleteExisting(Long id) {
-        repository.deleteExisting(repository.findByID(id).orElseThrow());
+        repository.delete(repository.findById(id).orElseThrow());
     }
 }

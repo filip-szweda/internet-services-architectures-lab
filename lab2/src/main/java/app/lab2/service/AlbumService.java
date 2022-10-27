@@ -20,7 +20,7 @@ public class AlbumService {
 
     @Transactional
     public Optional<Album> findByID(Long id) {
-        return repository.findByID(id);
+        return repository.findById(id);
     }
 
     @Transactional
@@ -30,11 +30,11 @@ public class AlbumService {
 
     @Transactional
     public void saveNew(Album album) {
-        repository.saveNew(album);
+        repository.save(album);
     }
 
     @Transactional
     public void deleteExisting(Long id) {
-        repository.deleteExisting(repository.findByID(id).orElseThrow());
+        repository.delete(repository.findById(id).orElseThrow());
     }
 }
