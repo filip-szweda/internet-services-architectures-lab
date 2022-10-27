@@ -56,9 +56,8 @@ public class AlbumController {
 
     @DeleteMapping("{name}")
     public ResponseEntity<Void> deleteAlbum(@PathVariable("id") Long id){
-        Optional<Album> album = albumService.findByID(id);
-        if(album.isPresent()){
-            albumService.deleteExisting(album.get().getId());
+        if(albumService.findByID(id).isPresent()){
+            albumService.deleteExisting(id);
             return ResponseEntity.accepted().build();
         }else{
             return ResponseEntity.notFound().build();

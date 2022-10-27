@@ -55,9 +55,8 @@ public class SongController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteSong(@PathVariable("id") long id) {
-        Optional<Song> song = songService.findByID(id);
-        if (song.isPresent()) {
-            songService.deleteExisting(song.get().getId());
+        if (songService.findByID(id).isPresent()) {
+            songService.deleteExisting(id);
             return ResponseEntity.accepted().build();
         } else {
             return ResponseEntity.notFound().build();

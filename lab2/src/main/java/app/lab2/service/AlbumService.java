@@ -34,7 +34,7 @@ public class AlbumService {
     }
 
     @Transactional
-    public void deleteExisting(Long song) {
-        repository.deleteExisting(repository.findByID(song).orElseThrow());
+    public void deleteExisting(Long id) {
+        repository.deleteExisting(repository.findByID(id).orElseThrow());
     }
 }
