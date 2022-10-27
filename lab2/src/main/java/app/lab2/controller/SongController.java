@@ -1,7 +1,6 @@
 package app.lab2.controller;
 
 import app.lab2.dto.*;
-import app.lab2.entity.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +16,6 @@ import app.lab2.service.SongService;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 @RestController
@@ -41,7 +39,7 @@ public class SongController {
 
     @GetMapping("{id}")
     public ResponseEntity<GetSongResponse> getSong(@PathVariable("id") long id) {
-        return songService.findByID(id)
+        return songService.find(id)
                 .map(value -> ResponseEntity.ok(GetSongResponse.entityToDtoMapper().apply(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -49,14 +47,14 @@ public class SongController {
     @PostMapping
     public ResponseEntity<Void> createSong(@RequestBody PostSongRequest request, UriComponentsBuilder builder) {
         Song song = PostSongRequest.dtoToEntityMapper().apply(request);
-        song = songService.saveNew(song);
+        song = songService.create(song);
         return ResponseEntity.created(builder.pathSegment("api", "songs", "{id}").buildAndExpand(song.getId()).toUri()).build();
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteSong(@PathVariable("id") long id) {
-        if (songService.findByID(id).isPresent()) {
-            songService.deleteExisting(id);
+        if (songService.find(id).isPresent()) {
+            songService.delete(id);
             return ResponseEntity.accepted().build();
         } else {
             return ResponseEntity.notFound().build();

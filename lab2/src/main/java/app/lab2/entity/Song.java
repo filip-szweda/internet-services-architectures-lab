@@ -18,9 +18,16 @@ import java.io.Serializable;
 public class Song implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "length")
     private String length;
+
+    @Column(name = "streams")
     private int streams;
 
     @ManyToOne

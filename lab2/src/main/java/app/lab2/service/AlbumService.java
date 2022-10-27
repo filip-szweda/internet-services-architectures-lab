@@ -1,5 +1,7 @@
 package app.lab2.service;
 
+import app.lab2.dto.PutAlbumResponse;
+import app.lab2.entity.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import app.lab2.entity.Album;
@@ -11,30 +13,47 @@ import java.util.Optional;
 
 @Service
 public class AlbumService {
-    private AlbumRepository repository;
+    private final AlbumRepository albumRepository;
+    private final SongService songService;
 
     @Autowired
-    public AlbumService(AlbumRepository repository) {
-        this.repository = repository;
+    public AlbumService(AlbumRepository repository, SongService songService) {
+        this.albumRepository = repository;
+        this.songService = songService;
     }
 
-    @Transactional
-    public Optional<Album> findByID(Long id) {
-        return repository.findById(id);
+    public Optional<Album> find(Long id) {
+        return albumRepository.findById(id);
     }
 
-    @Transactional
     public List<Album> findAll() {
-        return repository.findAll();
+        return albumRepository.findAll();
     }
 
     @Transactional
-    public void saveNew(Album album) {
-        repository.save(album);
+    public Album create(Album entity) {
+        return albumRepository.save(entity);
     }
 
     @Transactional
-    public void deleteExisting(Long id) {
-        repository.delete(repository.findById(id).orElseThrow());
+    public void delete(Long id) {
+        albumRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Long id, PutAlbumResponse albumResponse) {
+        find(id).ifPresentOrElse(
+                (original) -> {
+                    original.setName(albumResponse.getName());
+                    original.setArtist(albumResponse.getArtist());
+                },
+                () -> {
+                    throw new IllegalArgumentException("Cannot update album");
+                }
+        );
+    }
+
+    public List<Song> findAllByAlbumId(Long albumId) {
+        return songService.findAllByAlbumId(albumId);
     }
 }

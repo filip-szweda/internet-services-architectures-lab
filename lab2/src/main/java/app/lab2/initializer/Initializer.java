@@ -47,9 +47,9 @@ public class Initializer {
                 .score(4.05)
                 .build();
 
-        albumService.saveNew(pinkerton);
-        albumService.saveNew(exmilitary);
-        albumService.saveNew(deathconsciousness);
+        albumService.create(pinkerton);
+        albumService.create(exmilitary);
+        albumService.create(deathconsciousness);
 
         Song theGoodLife = Song.builder()
                 .name("The Good Life")
@@ -88,11 +88,11 @@ public class Initializer {
                 .album(deathconsciousness)
                 .build();
 
-        songService.saveNew(theGoodLife);
-        songService.saveNew(butterfly);
-        songService.saveNew(beware);
-        songService.saveNew(cultureShock);
-        songService.saveNew(telefony);
-        songService.saveNew(earthmover);
+        songService.create(theGoodLife);
+        songService.create(butterfly);
+        songService.create(beware);
+        songService.create(cultureShock);
+        songService.create(telefony);
+        songService.create(earthmover);
     }
 }
