@@ -1,5 +1,6 @@
 package app.lab2;
 
+import app.lab2.dto.SongDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -56,13 +57,12 @@ public class CommandLine implements CommandLineRunner {
                     long albumId = songInput.nextLong();
                     albumService.findByID(albumId).ifPresentOrElse(
                         (album) -> {
-                            Song song = Song.builder()
-                            .name(name)
-                            .length(length)
-                            .streams(streams)
-                            .album(album)
-                            .build();
-                            songService.saveNew(song);
+                            SongDTO songDTO = new SongDTO();
+                            songDTO.setName(name);
+                            songDTO.setLength(length);
+                            songDTO.setStreams(streams);
+                            songDTO.setAlbum(album);
+                            songService.saveNew(new Song(songDTO));
                         },
                         () -> { System.out.println("<Invalid album id>"); }
                     );
