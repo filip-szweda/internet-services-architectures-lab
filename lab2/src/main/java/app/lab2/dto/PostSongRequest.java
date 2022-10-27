@@ -9,9 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import app.lab2.entity.Song;
-
-import java.util.function.Function;
 
 @Getter
 @Setter
@@ -21,18 +18,8 @@ import java.util.function.Function;
 @ToString
 @EqualsAndHashCode
 public class PostSongRequest {
-    private String name;
-    private String length;
-    private int streams;
-    private Album album;
-
-    public static Function<PostSongRequest, Song> dtoToEntityMapper() {
-        return request -> Song.builder()
-                .name(request.getName())
-                .length(request.getLength())
-                .streams(request.getStreams())
-                .album(request.getAlbum())
-                .build();
-    }
-
+        private String name;
+        private String length;
+        private int streams;
+        private Album album;
 }

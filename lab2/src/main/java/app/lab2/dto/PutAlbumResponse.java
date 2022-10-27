@@ -1,6 +1,13 @@
 package app.lab2.dto;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -12,9 +19,9 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 public class PutAlbumResponse {
-    private String name;
-    private String artist;
-    private String[] genres;
-    private LocalDate releaseDate;
-    private double score;
+        private String name;
+        private String artist;
+        private String[] genres;
+        private LocalDate releaseDate;
+        private double score;
 }

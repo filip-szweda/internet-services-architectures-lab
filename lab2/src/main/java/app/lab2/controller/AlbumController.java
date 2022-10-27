@@ -39,7 +39,7 @@ public class AlbumController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> postAlbum(@RequestBody PostAlbumRequest request, UriComponentsBuilder builder){
+    public ResponseEntity<Void> create(@RequestBody PostAlbumRequest request, UriComponentsBuilder builder){
         Album album = PostAlbumRequest.dtoToEntityMapper().apply(request);
         Optional<Album> tmp = albumService.find(album.getId());
         if(tmp.isEmpty()){

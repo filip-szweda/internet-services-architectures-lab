@@ -1,7 +1,14 @@
 package app.lab2.dto;
 
 import app.lab2.entity.Album;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -11,8 +18,8 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class PutSongResponse {
-    private String name;
-    private String length;
-    private int streams;
-    private Album album;
+        private String name;
+        private String length;
+        private int streams;
+        private Album album;
 }
