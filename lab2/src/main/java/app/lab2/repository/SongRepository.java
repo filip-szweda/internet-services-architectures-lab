@@ -13,7 +13,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     List<Song> findAll();
 
-    void saveNew(Song entity);
+    Song saveNew(Song entity);
 
     void deleteExisting(Song entity);
 }

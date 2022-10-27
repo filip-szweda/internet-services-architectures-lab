@@ -27,8 +27,8 @@ public class SongService {
     }
 
     @Transactional
-    public void saveNew(Song song) {
-        repository.saveNew(song);
+    public Song saveNew(Song song) {
+        return repository.saveNew(song);
     }
 
     @Transactional

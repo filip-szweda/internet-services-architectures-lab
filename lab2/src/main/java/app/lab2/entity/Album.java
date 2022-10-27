@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +26,7 @@ public class Album implements Serializable {
     private String[] genres;
     private LocalDate releaseDate;
     private double score;
+
+    @OneToMany(mappedBy = "album")
+    private List<Song> songs;
 }
