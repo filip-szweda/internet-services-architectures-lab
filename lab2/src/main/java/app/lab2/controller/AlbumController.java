@@ -48,6 +48,7 @@ public class AlbumController {
         if (response.isPresent()) {
             Album album = response.get();
             return ResponseEntity.ok(GetAlbumResponse.builder()
+                    .id(album.getId())
                     .name(album.getName())
                     .artist(album.getArtist())
                     .genres(album.getGenres())
@@ -55,7 +56,6 @@ public class AlbumController {
                     .score(album.getScore())
                     .build());
         }
-
         return ResponseEntity.notFound().build();
     }
 
@@ -68,11 +68,36 @@ public class AlbumController {
                         .albums(
                                 albums.stream().map(
                                         (album) -> GetAlbumResponse.builder()
+                                                .id(album.getId())
                                                 .name(album.getName())
                                                 .artist(album.getArtist())
                                                 .genres(album.getGenres())
                                                 .releaseDate(album.getReleaseDate())
                                                 .score(album.getScore())
+                                                .build()
+                                ).collect(Collectors.toList())
+                        )
+                        .build()
+        );
+    }
+
+    @GetMapping("/{albumId}/songs")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetSongsResponse> readAllByAlbumId(@PathVariable(name="albumId") Long albumId) {
+        List<Song> songs = albumService.findAllByAlbumId(albumId);
+        if (songs.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(
+                GetSongsResponse.builder()
+                        .songs(
+                                songs.stream().map(
+                                        (song) -> GetSongResponse.builder()
+                                                .id(song.getId())
+                                                .name(song.getName())
+                                                .length(song.getLength())
+                                                .streams(song.getStreams())
                                                 .build()
                                 ).collect(Collectors.toList())
                         )
@@ -105,30 +130,6 @@ public class AlbumController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @GetMapping("/{albumId}/songs")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GetSongsResponse> readAllByAlbumId(@PathVariable(name="albumId") Long albumId) {
-        List<Song> songs = albumService.findAllByAlbumId(albumId);
-        if (songs.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(
-                GetSongsResponse.builder()
-                        .songs(
-                                songs.stream().map(
-                                        (song) -> GetSongResponse.builder()
-                                                .id(song.getId())
-                                                .name(song.getName())
-                                                .length(song.getLength())
-                                                .streams(song.getStreams())
-                                                .build()
-                                ).collect(Collectors.toList())
-                        )
-                        .build()
-        );
     }
 }
 

@@ -22,5 +22,4 @@ public class GetSongResponse {
         private String name;
         private String length;
         private int streams;
-        private Album album;
 }
