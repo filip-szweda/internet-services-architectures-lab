@@ -1,38 +1,19 @@
 package app.lab2.repository;
 
-import app.lab2.datastorage.DataStorage;
 import app.lab2.entity.Album;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@org.springframework.stereotype.Repository
-public class AlbumRepository implements Repository<Album, Long> {
-    private DataStorage storage;
+@Repository
+public interface AlbumRepository extends JpaRepository<Album, Long> {
+    Optional<Album> findByID(Long id);
 
-    @Autowired
-    public AlbumRepository(DataStorage storage) {
-        this.storage = storage;
-    }
+    List<Album> findAll();
 
-    @Override
-    public Optional<Album> findByID(Long id) {
-        return storage.findByIDAlbum(id);
-    }
+    void saveNew(Album entity);
 
-    @Override
-    public List<Album> findAll() {
-        return storage.findAllAlbums();
-    }
-
-    @Override
-    public void saveNew(Album entity) {
-        storage.saveNewAlbum(entity);
-    }
-
-    @Override
-    public void deleteExisting(Album entity) {
-        storage.deleteExistingAlbum(entity.getId());
-    }
+    void deleteExisting(Album entity);
 }
