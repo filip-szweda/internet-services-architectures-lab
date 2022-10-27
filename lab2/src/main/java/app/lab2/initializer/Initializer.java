@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Component
 public class Initializer {
@@ -31,6 +32,7 @@ public class Initializer {
                 .genres(new String[]{"Alternative Rock", "Power Pop", "Emo", "Noise Pop"})
                 .releaseDate(LocalDate.of(1996, 9, 24))
                 .score(3.82)
+                .songs(new ArrayList<>())
                 .build();
         Album exmilitary = Album.builder()
                 .name("Exmilitary")
@@ -38,6 +40,7 @@ public class Initializer {
                 .genres(new String[]{"Hardcore Hip Hop", "Industrial Hip Hop", "Abstract Hip Hop", "Experimental Hip Hop"})
                 .releaseDate(LocalDate.of(2011, 4, 25))
                 .score(4.08)
+                .songs(new ArrayList<>())
                 .build();
         Album deathconsciousness = Album.builder()
                 .name("Deathconsciousness")
@@ -45,6 +48,7 @@ public class Initializer {
                 .genres(new String[]{"Post-Punk", "Shoegaze", "Drone", "Post-Rock", "Post-Industrial", "Gothic Rock"})
                 .releaseDate(LocalDate.of(2008, 1, 24))
                 .score(4.05)
+                .songs(new ArrayList<>())
                 .build();
 
         albumService.create(pinkerton);

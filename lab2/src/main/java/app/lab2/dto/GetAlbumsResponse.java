@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,10 +20,5 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 public class GetAlbumsResponse {
-        private Long id;
-        private String name;
-        private String artist;
-        private String[] genres;
-        private LocalDate releaseDate;
-        private double score;
+        List<GetAlbumResponse> albums = new ArrayList<>();
 }

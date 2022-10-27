@@ -2,16 +2,18 @@ package app.lab2.controller;
 
 import app.lab2.dto.*;
 import app.lab2.entity.Album;
+import app.lab2.entity.Song;
 import app.lab2.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/albums")
@@ -23,43 +25,110 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
-    @GetMapping
-    public ResponseEntity<GetAlbumsResponse> getAlbums() {
-        List<Album> all = albumService.findAll();
-        Function<Collection<Album>, GetAlbumsResponse> mapper = GetAlbumsResponse.entityToDtoMapper();
-        GetAlbumsResponse response = mapper.apply(all);
-        return ResponseEntity.ok(response);
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> create(@RequestBody PostAlbumRequest postAlbumRequest, UriComponentsBuilder builder) {
+        Album album = Album.builder()
+                .name(postAlbumRequest.getName())
+                .artist(postAlbumRequest.getArtist())
+                .genres(postAlbumRequest.getGenres())
+                .releaseDate(postAlbumRequest.getReleaseDate())
+                .score(postAlbumRequest.getScore())
+                .songs(new ArrayList<>())
+                .build();
+        album = albumService.create(album);
+        return ResponseEntity.created(builder.pathSegment("api", "album", "{id}")
+                .buildAndExpand(album.getId()).toUri()).build();
     }
 
-    @GetMapping("{name}")
-    public ResponseEntity<GetAlbumResponse> getAlbum(@PathVariable("name") Long id){
-        return albumService.find(id)
-                .map(value -> ResponseEntity.ok(GetAlbumResponse.entityToDtoMapper().apply(value)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody PostAlbumRequest request, UriComponentsBuilder builder){
-        Album album = PostAlbumRequest.dtoToEntityMapper().apply(request);
-        Optional<Album> tmp = albumService.find(album.getId());
-        if(tmp.isEmpty()){
-            albumService.create(album);
-            return ResponseEntity.created(builder.pathSegment("api", "albums", "{name}")
-                    .buildAndExpand(album.getName()).toUri()).build();
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetAlbumResponse> read(@PathVariable(name = "id") Long id) {
+        Optional<Album> response = albumService.find(id);
+        if (response.isPresent()) {
+            Album album = response.get();
+            return ResponseEntity.ok(GetAlbumResponse.builder()
+                    .name(album.getName())
+                    .artist(album.getArtist())
+                    .genres(album.getGenres())
+                    .releaseDate(album.getReleaseDate())
+                    .score(album.getScore())
+                    .build());
         }
-        else {
-            return ResponseEntity.badRequest().build();
-        }
+
+        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("{name}")
-    public ResponseEntity<Void> deleteAlbum(@PathVariable("id") Long id){
-        if(albumService.find(id).isPresent()){
-            albumService.delete(id);
+    @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetAlbumsResponse> readAll() {
+        List<Album> albums = albumService.findAll();
+        return ResponseEntity.ok(
+                GetAlbumsResponse.builder()
+                        .albums(
+                                albums.stream().map(
+                                        (album) -> GetAlbumResponse.builder()
+                                                .name(album.getName())
+                                                .artist(album.getArtist())
+                                                .genres(album.getGenres())
+                                                .releaseDate(album.getReleaseDate())
+                                                .score(album.getScore())
+                                                .build()
+                                ).collect(Collectors.toList())
+                        )
+                        .build()
+        );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable(name = "id") Long id,
+                                       @RequestBody PutAlbumResponse albumResponse) {
+        try {
+            Album album = Album.builder()
+                    .name(albumResponse.getName())
+                    .artist(albumResponse.getArtist())
+                    .build();
+            albumService.update(id, albumResponse);
             return ResponseEntity.accepted().build();
-        }else{
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
+        Optional<Album> album = albumService.find(id);
+        if (album.isPresent()) {
+            albumService.delete(album.get().getId());
+            return ResponseEntity.accepted().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{albumId}/songs")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetSongsResponse> readAllByAlbumId(@PathVariable(name="albumId") Long albumId) {
+        List<Song> songs = albumService.findAllByAlbumId(albumId);
+        if (songs.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(
+                GetSongsResponse.builder()
+                        .songs(
+                                songs.stream().map(
+                                        (song) -> GetSongResponse.builder()
+                                                .id(song.getId())
+                                                .name(song.getName())
+                                                .length(song.getLength())
+                                                .streams(song.getStreams())
+                                                .build()
+                                ).collect(Collectors.toList())
+                        )
+                        .build()
+        );
     }
 }
 
