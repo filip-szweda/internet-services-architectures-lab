@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Table(name = "songs")
 public class Song implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
