@@ -29,8 +29,8 @@ public class SongService {
     }
 
     @Transactional
-    public List<Song> findAllByAlbumId(Long courseId) {
-        return songRepository.findAllByAlbumId(courseId);
+    public List<Song> findAllByAlbumId(Long albumId) {
+        return songRepository.findAllByAlbumId(albumId);
     }
 
     @Transactional
@@ -59,8 +59,8 @@ public class SongService {
 
     @Transactional
     public void addAlbumToSong(Long albumId, Song song) {
-        Optional<Album> course = albumRepository.findById(albumId);
-        course.ifPresentOrElse(
+        Optional<Album> album = albumRepository.findById(albumId);
+        album.ifPresentOrElse(
                 song::setAlbum,
                 () -> {
                     throw new IllegalArgumentException("Cannot add song to album");
