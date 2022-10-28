@@ -44,6 +44,7 @@ public class SongService {
                 (original) -> {
                     original.setName(song.getName());
                     original.setLength(song.getLength());
+                    original.setStreams(song.getStreams());
                 },
                 () -> {
                     throw new IllegalArgumentException("Cannot update song");

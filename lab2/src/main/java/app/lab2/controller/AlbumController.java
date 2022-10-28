@@ -112,6 +112,9 @@ public class AlbumController {
             Album album = Album.builder()
                     .name(albumResponse.getName())
                     .artist(albumResponse.getArtist())
+                    .genres(albumResponse.getGenres())
+                    .releaseDate(albumResponse.getReleaseDate())
+                    .score(albumResponse.getScore())
                     .build();
             albumService.update(id, albumResponse);
             return ResponseEntity.accepted().build();

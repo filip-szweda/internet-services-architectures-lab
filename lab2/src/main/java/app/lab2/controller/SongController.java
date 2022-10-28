@@ -81,6 +81,7 @@ public class SongController {
             Song song = Song.builder()
                     .name(songResponse.getName())
                     .length(songResponse.getLength())
+                    .streams(songResponse.getStreams())
                     .build();
             songService.update(id, song);
             return ResponseEntity.accepted().build();

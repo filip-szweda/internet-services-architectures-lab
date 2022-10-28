@@ -46,6 +46,9 @@ public class AlbumService {
                 (original) -> {
                     original.setName(albumResponse.getName());
                     original.setArtist(albumResponse.getArtist());
+                    original.setGenres(albumResponse.getGenres());
+                    original.setReleaseDate(albumResponse.getReleaseDate());
+                    original.setScore(albumResponse.getScore());
                 },
                 () -> {
                     throw new IllegalArgumentException("Cannot update album");
