@@ -1,6 +1,7 @@
 package app.lab2.controller;
 
 import app.lab2.dto.*;
+import app.lab2.entity.Album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,16 +61,17 @@ public class SongController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<GetSongResponse> read(@PathVariable(name = "id") Long id) {
-        return songService.find(id).map(
-                (song) ->
-                        ResponseEntity.ok(GetSongResponse.builder()
-                                .id(song.getId())
-                                .name(song.getName())
-                                .length(song.getLength())
-                                .streams(song.getStreams())
-                                .build())
-
-        ).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Song> response = songService.find(id);
+        if (response.isPresent()) {
+            Song song = response.get();
+            return ResponseEntity.ok(GetSongResponse.builder()
+                    .id(song.getId())
+                    .name(song.getName())
+                    .length(song.getLength())
+                    .streams(song.getStreams())
+                    .build());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
