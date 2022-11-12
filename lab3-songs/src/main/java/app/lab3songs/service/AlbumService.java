@@ -13,10 +13,12 @@ import java.util.Optional;
 @Service
 public class AlbumService {
     private final AlbumRepository albumRepository;
+    private final SongService songService;
 
     @Autowired
-    public AlbumService(AlbumRepository repository) {
+    public AlbumService(AlbumRepository repository, SongService songService) {
         this.albumRepository = repository;
+        this.songService = songService;
     }
 
     public Optional<Album> find(Long id) {
@@ -31,5 +33,9 @@ public class AlbumService {
     @Transactional
     public void delete(Long id) {
         albumRepository.deleteById(id);
+    }
+
+    public List<Song> findAllByAlbumId(Long albumId) {
+        return songService.findAllByAlbumId(albumId);
     }
 }
