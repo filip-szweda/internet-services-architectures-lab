@@ -1,4 +1,4 @@
-package app.lab3.dto;
+package app.lab3songs.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,6 +18,10 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class GetSongsResponse {
-        List<GetSongResponse> songs = new ArrayList<>();
+public class PostAlbumRequest {
+        private String name;
+        private String artist;
+        private String[] genres;
+        private LocalDate releaseDate;
+        private double score;
 }

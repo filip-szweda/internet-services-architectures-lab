@@ -1,13 +1,13 @@
-package app.lab3.controller;
+package app.lab3songs.controller;
 
-import app.lab3.dto.*;
+import app.lab3songs.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import app.lab3.entity.Song;
-import app.lab3.service.SongService;
+import app.lab3songs.entity.Song;
+import app.lab3songs.service.SongService;
 
 import java.util.List;
 import java.util.Optional;
@@ -95,20 +95,6 @@ public class SongController {
         Optional<Song> song = songService.find(id);
         if (song.isPresent()) {
             songService.delete(song.get().getId());
-            return ResponseEntity.accepted().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PatchMapping("/{id}/add")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> addAlbumToSong(
-            @RequestBody PatchSongAlbumAddResponse response,
-            @PathVariable(name="id" ) Long id) {
-        Optional<Song> song = songService.find(id);
-        if (song.isPresent()) {
-            songService.addAlbumToSong(response.getAlbumId(), song.get());
             return ResponseEntity.accepted().build();
         } else {
             return ResponseEntity.notFound().build();

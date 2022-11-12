@@ -1,11 +1,11 @@
-package app.lab3.service;
+package app.lab3songs.service;
 
-import app.lab3.entity.Album;
-import app.lab3.repository.AlbumRepository;
+import app.lab3songs.entity.Album;
+import app.lab3songs.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import app.lab3.entity.Song;
-import app.lab3.repository.SongRepository;
+import app.lab3songs.entity.Song;
+import app.lab3songs.repository.SongRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;

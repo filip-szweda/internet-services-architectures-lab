@@ -1,6 +1,6 @@
-package app.lab3.repository;
+package app.lab3songs.repository;
 
-import app.lab3.entity.Song;
+import app.lab3songs.entity.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

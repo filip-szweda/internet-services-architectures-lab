@@ -1,4 +1,4 @@
-package app.lab3.entity;
+package app.lab3songs.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -26,18 +26,6 @@ public class Album implements Serializable {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "artist")
-    private String artist;
-
-    @Column(name = "genres")
-    private String[] genres;
-
-    @Column(name = "release_date")
-    private LocalDate releaseDate;
-
-    @Column(name = "score")
-    private double score;
 
     @OneToMany(mappedBy = "album",fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @ToString.Exclude

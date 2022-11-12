@@ -1,4 +1,4 @@
-package app.lab3.utility;
+package app.lab3songs.utility;
 
 import lombok.extern.java.Log;
 

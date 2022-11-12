@@ -1,4 +1,4 @@
-package app.lab3.entity;
+package app.lab3songs.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;

@@ -1,6 +1,5 @@
-package app.lab3.dto;
+package app.lab3songs.dto;
 
-import app.lab3.entity.Album;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,9 +16,9 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class PutSongResponse {
+public class GetSongResponse {
+        private Long id;
         private String name;
         private String length;
         private int streams;
-        private Album album;
 }
