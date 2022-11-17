@@ -28,9 +28,7 @@ public class AlbumController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> create(@RequestBody PostAlbumRequest postAlbumRequest, UriComponentsBuilder builder) {
-        Album album = Album.builder()
-                .name(postAlbumRequest.getName())
-                .build();
+        Album album = Album.builder().build();
         album = albumService.create(album);
         return ResponseEntity.created(builder.pathSegment("api", "album", "{id}")
                 .buildAndExpand(album.getId()).toUri()).build();

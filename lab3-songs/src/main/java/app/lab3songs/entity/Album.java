@@ -24,9 +24,6 @@ public class Album implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @OneToMany(mappedBy = "album",fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @ToString.Exclude
     private List<Song> songs = new ArrayList<>();

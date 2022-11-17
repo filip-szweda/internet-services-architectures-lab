@@ -26,15 +26,9 @@ public class Initializer {
     @PostConstruct
     @Transactional
     private synchronized void init() {
-        Album pinkerton = Album.builder()
-                .name("Pinkerton")
-                .build();
-        Album exmilitary = Album.builder()
-                .name("Exmilitary")
-                .build();
-        Album deathconsciousness = Album.builder()
-                .name("Deathconsciousness")
-                .build();
+        Album pinkerton = Album.builder().build();
+        Album exmilitary = Album.builder().build();
+        Album deathconsciousness = Album.builder().build();
 
         albumService.create(pinkerton);
         albumService.create(exmilitary);
