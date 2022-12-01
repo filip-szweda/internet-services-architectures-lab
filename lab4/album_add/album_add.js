@@ -1,4 +1,3 @@
-import {getParameterByName} from '../js/dom_utils.js';
 import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
@@ -6,10 +5,6 @@ window.addEventListener('load', () => {
     infoForm.addEventListener('submit', event => updateInfoAction(event));
 });
 
-/**
- * Action event handled for updating album info.
- * @param {Event} event dom event
- */
 function updateInfoAction(event) {
     event.preventDefault();
 
@@ -20,8 +15,6 @@ function updateInfoAction(event) {
     const artist = document.getElementById('artist').value;
     const release_date = document.getElementById('release_date').value;
     const score = parseFloat(document.getElementById("score").value);
-
-    console.error(name + ' ' + artist + ' ' + release_date + ' ' + score);
 
     const request = {
         'name': name,

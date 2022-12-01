@@ -9,9 +9,6 @@ window.addEventListener('load', () => {
     fetchAndDisplayAlbum();
 });
 
-/**
- * Fetches currently logged song's albums and updates edit form.
- */
 function fetchAndDisplayAlbum() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -30,10 +27,6 @@ function fetchAndDisplayAlbum() {
     xhttp.send();
 }
 
-/**
- * Action event handled for updating album info.
- * @param {Event} event dom event
- */
 function updateInfoAction(event) {
     event.preventDefault();
 
