@@ -2,7 +2,6 @@ import {getParameterByName} from '../js/dom_utils.js';
 import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
-    console.log('elo')
     const infoForm = document.getElementById('infoForm');
     infoForm.addEventListener('submit', event => updateInfoAction(event));
 });
@@ -22,7 +21,7 @@ function updateInfoAction(event) {
     const release_date = document.getElementById('release_date').value;
     const score = parseFloat(document.getElementById("score").value);
 
-    console.log(name + ' ' + artist + ' ' + release_date + ' ' + score);
+    console.error(name + ' ' + artist + ' ' + release_date + ' ' + score);
 
     const request = {
         'name': name,

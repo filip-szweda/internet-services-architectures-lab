@@ -1,9 +1,8 @@
 import {
     getParameterByName,
-    setLinkNode,
     setTextNode
-} from '../js/utils.js';
-import {getBackendUrl} from '../js/config.js';
+} from '../js/dom_utils.js';
+import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
     fetchAndDisplayAlbum();
@@ -19,19 +18,13 @@ function fetchAndDisplayAlbum() {
             displayAlbum(JSON.parse(this.responseText))
         }
     };
-    if(getParameterByName('song')) {
-        xhttp.open("GET", getBackendUrl() + '/api/songs/' + getParameterByName('song') + '/album/' + getParameterByName('album'), true);
-    } else {
-        xhttp.open("GET", getBackendUrl() + '/api/albums/' + getParameterByName('album'))
-    }
+    xhttp.open("GET", getBackendUrl() + '/api/albums/' + getParameterByName('album'))
     xhttp.send();
 }
 
 function displayAlbum(album) {
     setTextNode('name', album.name);
     setTextNode('artist', album.artist);
-    setTextNode('release_date', album.release_date);
-    setTextNode('score', album.score)
-    setLinkNode('edit', 'edit', '../album_edit/album_edit.html?song='
-    + getParameterByName('song') + '&album=' + album.address)
+    setTextNode('releaseDate', album.releaseDate);
+    setTextNode('score', album.score);
 }
