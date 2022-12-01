@@ -2,8 +2,8 @@ import {getParameterByName, setTextNode, clearElementChildren, createButtonCell,
 import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
-    const add_new_album = document.getElementById('new-element');
-    add_new_album.addEventListener('click', event => displayForm(event))
+    const add_new_song = document.getElementById('new-element');
+    add_new_song.addEventListener('click', event => displayForm(event))
     fetchAndDisplayAlbum();
     fetchAndDisplaySongs();
 });
@@ -27,6 +27,7 @@ function displayAlbum(album) {
     setTextNode('name', album.name);
     setTextNode('artist', album.artist);
     setTextNode('releaseDate', album.releaseDate);
+    console.log(album.releaseDate);
     setTextNode('score', album.score);
 }
 

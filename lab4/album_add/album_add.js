@@ -13,13 +13,13 @@ function updateInfoAction(event) {
 
     const name = document.getElementById('name').value;
     const artist = document.getElementById('artist').value;
-    const release_date = document.getElementById('release_date').value;
+    const releaseDate = document.getElementById('releaseDate').value;
     const score = parseFloat(document.getElementById("score").value);
 
     const request = {
         'name': name,
         'artist': artist,
-        'release_date': release_date,
+        'releaseDate': releaseDate,
         'score': score
     };
 
