@@ -43,8 +43,6 @@ function updateInfoAction(event) {
     const release_date = document.getElementById('releaseDate').value;
     const score = parseFloat(document.getElementById("score").value);
 
-    console.log(name + ' ' + artist + ' ' + release_date + ' ' + score);
-
     const request = {
         'name': name,
         'artist': artist,

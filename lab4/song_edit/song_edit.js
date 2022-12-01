@@ -1,7 +1,5 @@
-//FIXXXXXXXXX
-
-import {getParameterByName, setTextNode} from '../js/utils.js';
-import {getBackendUrl} from '../js/config.js';
+import {getParameterByName} from '../js/dom_utils.js';
+import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
     const infoForm = document.getElementById('infoForm');
@@ -11,9 +9,6 @@ window.addEventListener('load', () => {
     fetchAndDisplaySong();
 });
 
-/**
- * Fetches currently logged song's songs and updates edit form.
- */
 function fetchAndDisplaySong() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -23,19 +18,15 @@ function fetchAndDisplaySong() {
                 let input = document.getElementById(key);
                 if (input) {
                     input.value = value;
-                    setTextNode(key, value);
                 }
             }
         }
     };
-    xhttp.open("GET", getBackendUrl() + '/api/songs/' + getParameterByName('song'), true);
+
+    xhttp.open("GET", getBackendUrl() + '/api/songs/' + getParameterByName('song'))
     xhttp.send();
 }
 
-/**
- * Action event handled for updating song info.
- * @param {Event} event dom event
- */
 function updateInfoAction(event) {
     event.preventDefault();
 
@@ -47,9 +38,14 @@ function updateInfoAction(event) {
     };
     xhttp.open("PUT", getBackendUrl() + '/api/songs/' + getParameterByName('song'), true);
 
+    const name = document.getElementById('name').value;
+    const length = document.getElementById('length').value;
+    const streams = parseInt(document.getElementById('streams').value);
+
     const request = {
-        'age': parseInt(document.getElementById('age').value),
-        'phoneNumber': document.getElementById('phone').value
+        'name': name,
+        'length': length,
+        'streams': streams
     };
 
     xhttp.setRequestHeader('Content-Type', 'application/json');

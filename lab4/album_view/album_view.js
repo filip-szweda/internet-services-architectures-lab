@@ -2,9 +2,15 @@ import {getParameterByName, setTextNode, clearElementChildren, createButtonCell,
 import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
+    const add_new_album = document.getElementById('new-element');
+    add_new_album.addEventListener('click', event => displayForm(event))
     fetchAndDisplayAlbum();
     fetchAndDisplaySongs();
 });
+
+function displayForm() {
+    window.location.href = '../song_add/song_add.html';
+  }
 
 function fetchAndDisplayAlbum() {
     const xhttp = new XMLHttpRequest();
