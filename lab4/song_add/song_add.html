@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Music streaming service</title>
-        <script type="module" src="album_add.js" defer="defer"></script>
+        <script type="module" src="song_add.js" defer="defer"></script>
     </head>
     <body>
         <div class="container">
@@ -14,25 +14,21 @@
             <nav class="navigation-bar">
                 <ul>
                     <li><a href="../index.html">main</a></li>
-                    <li><a href="../album_list/album_list.html">previous</a></li>
                 </ul>
             </nav>
 
             <section class="main-section">
                 <article class="text--justified">
-                    <header><h2>Add album info</h2></header>
-                    <form class="album__form" id="infoForm">
+                    <header><h2>Add song info</h2></header>
+                    <form class="song__form" id="infoForm">
                         <label for="name">Name:</label>
                         <input class="ui-control ui-input" id="name" name="name"/>
                         <br>
-                        <label for="artist">Artist:</label>
-                        <input class="ui-control ui-input" id="artist" name="artist"/>
+                        <label for="artist">Length:</label>
+                        <input class="ui-control ui-input" id="length" name="length"/>
                         <br>
-                        <label for="release_date">Release date:</label>
-                        <input class="ui-control ui-input" id="release_date" name="release_date"/>
-                        <br>
-                        <label for="score">Score:</label>
-                        <input class="ui-control ui-input" id="score" name="score"/>
+                        <label for="release_date">Streams:</label>
+                        <input class="ui-control ui-input" id="streams" name="streams"/>
                         <br>
                         <input class="ui-control ui-button" type="submit" name="Add"/>
                     </form>
