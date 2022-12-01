@@ -11,9 +11,6 @@ function displayForm() {
   window.location.href = '../album_add/album_add.html';
 }
 
-/**
- * Fetches all users and modifies the DOM tree in order to display them.
- */
 function fetchAndDisplayAlbums() {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -30,25 +27,14 @@ function fetchAndDisplayAlbums() {
   xhttp.send();
 }
 
-/**
- * Updates the DOM tree in order to display users.
- *
- * @param {{users: string[]}} albums
- */
 function displayAlbums(albums) {
   let tableBody = document.getElementById('tableBody');
   clearElementChildren(tableBody);
-  albums.albums.forEach(user => {
-    tableBody.appendChild(createTableRow(user.name, user.id));
+  albums.albums.forEach(album => {
+    tableBody.appendChild(createTableRow(album.name, album.id));
   })
 }
 
-/**
- * Creates single table row for entity.
- *
- * @param {string} album
- * @returns {HTMLTableRowElement}
- */
 function createTableRow(name, id) {
   console.log(name)
   let tr = document.createElement('tr');
@@ -59,11 +45,6 @@ function createTableRow(name, id) {
   return tr;
 }
 
-/**
- * Deletes entity from backend and reloads table.
- *
- * @param {int } id to be deleted
- */
 function deleteAlbum(id) {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
