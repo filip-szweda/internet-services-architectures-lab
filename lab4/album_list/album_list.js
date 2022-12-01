@@ -1,35 +1,46 @@
-import {clearElementChildren, createLinkCell, createButtonCell, createTextCell} from '../js/utils.js';
-import {getBackendUrl} from '../js/config.js';
+import {clearElementChildren, createButtonCell, createLinkCell, createTextCell} from '../js/dom_utils.js';
+import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
-    fetchAndDisplayAlbums();
+  const add_new_album = document.getElementById('new-category');
+  add_new_album.addEventListener('click', event => displayForm(event))
+  fetchAndDisplayAlbums();
 });
 
-/**
- * Fetches all albums and modifies the DOM tree in order to display them.
- */
-function fetchAndDisplayAlbums() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            displayAlbums(JSON.parse(this.responseText))
-        }
-    };
-    xhttp.open("GET", getBackendUrl() + '/api/albums', true);
-    xhttp.send();
+function displayForm() {
+  window.location.href = '../form/form.html';
 }
 
 /**
- * Updates the DOM tree in order to display albums.
+ * Fetches all users and modifies the DOM tree in order to display them.
+ */
+function fetchAndDisplayAlbums() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      let albums = JSON.parse(this.responseText)
+      if (albums.albums.length === 0) {
+        console.log("empty collection")
+        return;
+      }
+      displayAlbums(JSON.parse(this.responseText))
+    }
+  };
+  xhttp.open("GET", getBackendUrl() + '/api/albums/', true);
+  xhttp.send();
+}
+
+/**
+ * Updates the DOM tree in order to display users.
  *
- * @param {{albums: string[]}} albums
+ * @param {{users: string[]}} albums
  */
 function displayAlbums(albums) {
-    let tableBody = document.getElementById('tableBody');
-    clearElementChildren(tableBody);
-    albums.albums.forEach(album => {
-        tableBody.appendChild(createTableRow(album));
-    })
+  let tableBody = document.getElementById('tableBody');
+  clearElementChildren(tableBody);
+  albums.albums.forEach(user => {
+    tableBody.appendChild(createTableRow(user.name, user.id));
+  })
 }
 
 /**
@@ -38,27 +49,28 @@ function displayAlbums(albums) {
  * @param {string} album
  * @returns {HTMLTableRowElement}
  */
-function createTableRow(album) {
-    let tr = document.createElement('tr');
-    tr.appendChild(createTextCell(album["name"]));
-    tr.appendChild(createLinkCell('view', '../album_view/album_view.html?album=' + album["address"]));
-    tr.appendChild(createLinkCell('edit', '../album_edit/album_edit.html?album=' + album["address"]));
-    tr.appendChild(createButtonCell('delete', () => deleteAlbum(album)));
-    return tr;
+function createTableRow(name, id) {
+  console.log(name)
+  let tr = document.createElement('tr');
+  tr.appendChild(createTextCell(name));
+  tr.appendChild(createLinkCell('view', '../album_view/album_view.html?album=' + name));
+  tr.appendChild(createLinkCell('edit', '../form_edit/form.html?album=' + name));
+  tr.appendChild(createButtonCell('delete', () => deleteAlbum(id)));
+  return tr;
 }
 
 /**
  * Deletes entity from backend and reloads table.
  *
- * @param {string } album to be deleted
+ * @param {int } id to be deleted
  */
-function deleteAlbum(album) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 202) {
-            fetchAndDisplayAlbums();
-        }
-    };
-    xhttp.open("DELETE", getBackendUrl() + '/api/albums/' + album["address"], true);
-    xhttp.send();
+function deleteAlbum(id) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 202) {
+      fetchAndDisplayAlbums();
+    }
+  };
+  xhttp.open("DELETE", getBackendUrl() + '/api/albums/' + id, true);
+  xhttp.send();
 }

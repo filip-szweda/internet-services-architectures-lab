@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Album</title>
+        <script type="module" src="album_list.js" defer="defer"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1>Music streaming service</h1>
+            </header>
+
+            <nav class="navigation-bar">
+                <ul>
+                    <li><a href="../index.html">main</a></li>
+                    <li><a href="../song_list/song_list.html">songs</a></li>
+                    <li><a href="album_list.html">albums</a></li>
+                </ul>
+            </nav>
+
+            <section class="main-section">
+                <article class="text--justified">
+                    <header><h2>Albums</h2></header>
+                    <button class="ui-button ui-control" id="new-category">add new category</button>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>view</th>
+                                <th>edit</th>
+                                <th>delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+
+            <footer class="footer">
+                <p>Copyright &copy; 2022, Filip Szweda 184738</p>
+            </footer>
+        </div>
+    </body>
+</html>
