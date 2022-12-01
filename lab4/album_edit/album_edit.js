@@ -1,5 +1,5 @@
-import {getParameterByName} from '../js/utils.js';
-import {getBackendUrl} from '../js/config.js';
+import {getParameterByName} from '../js/dom_utils.js';
+import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
     const infoForm = document.getElementById('infoForm');
@@ -25,11 +25,8 @@ function fetchAndDisplayAlbum() {
             }
         }
     };
-    if(getParameterByName('song')) {
-        xhttp.open("GET", getBackendUrl() + '/api/songs/' + getParameterByName('song') + '/albums/' + getParameterByName('album'), true);
-    } else {
-        xhttp.open("GET", getBackendUrl() + '/api/albums/' + getParameterByName('album'))
-    }
+
+    xhttp.open("GET", getBackendUrl() + '/api/albums/' + getParameterByName('album'))
     xhttp.send();
 }
 
@@ -46,12 +43,20 @@ function updateInfoAction(event) {
             fetchAndDisplayAlbum();
         }
     };
-    xhttp.open("PUT", getBackendUrl() + '/api/songs/' + getParameterByName('song') + '/albums/'
-        + getParameterByName('album'), true);
+    xhttp.open("PUT", getBackendUrl() + '/api/albums/' + getParameterByName('album'), true);
+
+    const name = document.getElementById('name').value;
+    const artist = document.getElementById('artist').value;
+    const release_date = document.getElementById('releaseDate').value;
+    const score = parseFloat(document.getElementById("score").value);
+
+    console.log(name + ' ' + artist + ' ' + release_date + ' ' + score);
 
     const request = {
-        'name': document.getElementById('name').value,
-        'area': parseInt(document.getElementById('area').value)
+        'name': name,
+        'artist': artist,
+        'releaseDate': release_date,
+        'score': score
     };
 
     xhttp.setRequestHeader('Content-Type', 'application/json');
