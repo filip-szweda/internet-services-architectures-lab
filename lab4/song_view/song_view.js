@@ -2,8 +2,6 @@ import {getParameterByName, setTextNode} from '../js/dom_utils.js';
 import {getBackendUrl} from '../js/configuration.js';
 
 window.addEventListener('load', () => {
-    const add_new_song = document.getElementById('new-element');
-    add_new_song.addEventListener('click', event => displayForm(event))
     fetchAndDisplaySong();
 });
 
