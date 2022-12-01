@@ -53,8 +53,8 @@ function createTableRow(name, id) {
   console.log(name)
   let tr = document.createElement('tr');
   tr.appendChild(createTextCell(name));
-  tr.appendChild(createLinkCell('view', '../album_view/album_view.html?album=' + name));
-  tr.appendChild(createLinkCell('edit', '../form_edit/form.html?album=' + name));
+  tr.appendChild(createLinkCell('view', '../album_view/album_view.html?album=' + id));
+  tr.appendChild(createLinkCell('edit', '../album_edit/album_edit.html?album=' + id));
   tr.appendChild(createButtonCell('delete', () => deleteAlbum(id)));
   return tr;
 }
