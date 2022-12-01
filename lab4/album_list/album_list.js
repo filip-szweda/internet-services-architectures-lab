@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 });
 
 function displayForm() {
-  window.location.href = '../form/form.html';
+  window.location.href = '../album_add/album_add.html';
 }
 
 /**
