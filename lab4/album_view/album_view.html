@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Music streaming service"/>
+        <meta name="keywords" content="music"/>
+        <meta name="author" content="Filip Szweda 184738"/>
+        <title>Music streaming service</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <script type="module" src="album_view.js" defer="defer"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1>Music streaming service</h1>
+            </header>
+
+            <nav class="navigation-bar">
+                <ul>
+                    <li><a href="../index.html">main</a></li>
+                    <li><a href="../song_list/song_list.html">songs</a></li>
+                    <li><a href="../album_list/album_list.html">albums</a></li>
+                </ul>
+            </nav>
+
+            <section class="main-section">
+                <article class="text--justified">
+                    <header><h2 id="name">name</h2></header>
+                    <section>
+                        <h3>Details</h3>
+                        <div class="details-grid">
+                            <label for="album_name">Name:</label><span id="album_name">name</span>
+                            <br>
+                            <label for="album_artist">Artist:</label><span id="album_artist">artist</span>
+                            <br>
+                            <label for="album_release_date">Release date:</label><span id="album_release_date">release date</span>
+                            <br>
+                            <label for="album_score">Score:</label><span id="album_score">score</span>
+                        </div>
+                    </section>
+                    <a id='edit' href="../index.html">edit</a>
+                </article>
+            </section>
+            <footer class="footer">
+                <p>Copyright &copy; 2022, Filip Szweda 184738</p>
+            </footer>
+        </div>
+    </body>
+</html>

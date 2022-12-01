@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lab3-albums/albums.iml" filepath="$PROJECT_DIR$/lab3-albums/albums.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab3-gateway/gateway.iml" filepath="$PROJECT_DIR$/lab3-gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/internet-services-architectures-lab.iml" filepath="$PROJECT_DIR$/.idea/internet-services-architectures-lab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab3-songs/songs.iml" filepath="$PROJECT_DIR$/lab3-songs/songs.iml" />
+    </modules>
+  </component>
+</project>
