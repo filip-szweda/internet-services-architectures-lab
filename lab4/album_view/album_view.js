@@ -29,9 +29,9 @@ function fetchAndDisplayAlbum() {
 
 function displayAlbum(album) {
     setTextNode('name', album.name);
-    setTextNode('address', album.address);
-    setTextNode('area', album.area);
-    setTextNode('owner', album.owner)
+    setTextNode('artist', album.artist);
+    setTextNode('release_date', album.release_date);
+    setTextNode('score', album.score)
     setLinkNode('edit', 'edit', '../album_edit/album_edit.html?song='
     + getParameterByName('song') + '&album=' + album.address)
 }
