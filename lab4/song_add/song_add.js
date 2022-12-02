@@ -55,8 +55,8 @@ function addToAlbum(event, song_id, album_id) {
     event.preventDefault();
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", getBackendUrl() + '/api/songs/' + song_id + '/add')
-    const request = { 'id': album_id};
+    xhttp.open("PATCH", getBackendUrl() + '/api/songs/' + song_id + '/')
+    const request = { 'albumId': album_id};
 
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(request));

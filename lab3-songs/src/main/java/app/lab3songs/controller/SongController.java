@@ -101,7 +101,7 @@ public class SongController {
         }
     }
 
-    @PatchMapping("/{id}/add")
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> addAlbumToSong(
             @RequestBody PatchSongAlbumAddResponse response,
