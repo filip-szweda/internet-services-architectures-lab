@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
 });
 
 function displayForm() {
-    window.location.href = '../song_add/song_add.html';
+    window.location.href = '../song_add/song_add.html?album=' + getParameterByName('album');
   }
 
 function fetchAndDisplayAlbum() {

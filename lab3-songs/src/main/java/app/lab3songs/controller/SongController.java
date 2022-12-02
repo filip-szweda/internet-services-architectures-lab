@@ -100,4 +100,18 @@ public class SongController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PatchMapping("/{id}/add")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> addAlbumToSong(
+            @RequestBody PatchSongAlbumAddResponse response,
+            @PathVariable(name="id" ) Long id) {
+        Optional<Song> song = songService.find(id);
+        if (song.isPresent()) {
+            songService.addAlbumToSong(response.getAlbumId(), song.get());
+            return ResponseEntity.accepted().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
